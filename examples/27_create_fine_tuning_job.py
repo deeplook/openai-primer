@@ -14,7 +14,7 @@ def main() -> None:
     if client is None:
         return
     if not path.exists():
-        print("SKIP: run examples/25_fine_tuning_data.py first")
+        print("SKIP: run examples/26_fine_tuning_data.py first")
         return
 
     with path.open("rb") as handle:

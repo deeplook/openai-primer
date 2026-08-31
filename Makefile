@@ -8,10 +8,11 @@ LIVE_CORE := examples/01_first_response.py examples/02_chat_completions.py \
 	examples/05_response_metadata.py examples/06_streaming.py \
 	examples/07_structured_output.py examples/08_function_calling.py \
 	examples/09_web_search.py examples/10_vision.py examples/11_embeddings.py \
-	examples/12_moderation.py examples/20_background_response.py \
-	examples/21_async_concurrency.py examples/22_list_models.py \
-	examples/30_prompt_eval.py examples/31_prompt_cache.py \
-	examples/32_error_handling.py
+	examples/12_rag_manual.py examples/13_moderation.py \
+	examples/21_background_response.py \
+	examples/22_async_concurrency.py examples/23_list_models.py \
+	examples/31_prompt_eval.py examples/32_prompt_cache.py \
+	examples/33_error_handling.py
 
 help: ## Show targets
 	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS=":.*## "}; {printf "  %-14s %s\n", $$1, $$2}'
@@ -43,7 +44,7 @@ usage: ## Query this UTC day's token usage (needs OPENAI_ADMIN_KEY and project I
 	uv run python tools/current_usage.py
 
 clean-remote: ## Delete or cancel only explicitly named remote resources
-	uv run python examples/34_cleanup_resources.py
+	uv run python examples/35_cleanup_resources.py
 
 check-all: lint test ## Run all quality checks
 

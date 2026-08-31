@@ -11,7 +11,7 @@ def main() -> None:
     if client is None:
         return
     if not path.exists():
-        print("SKIP: run examples/16_batch_manifest.py first")
+        print("SKIP: run examples/17_batch_manifest.py first")
         return
 
     with path.open("rb") as handle:

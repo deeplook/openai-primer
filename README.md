@@ -31,29 +31,30 @@ successfully. This keeps the test suite offline and cost-free.
 | `09_web_search.py` | OpenAI-hosted web search |
 | `10_vision.py` | Image URL input |
 | `11_embeddings.py` | Text embeddings and cosine similarity |
-| `12_moderation.py` | Classify unsafe content |
-| `13_transcription.py` | Transcribe a local audio file |
-| `14_speech.py` | Generate speech to an MP3 file |
-| `15_image_generation.py` | Generate a PNG image |
-| `16_batch_manifest.py` | Build a JSONL manifest for the Batch API |
-| `17_upload_file.py` | Upload a local file for later API use |
-| `18_vector_store.py` | Create a vector store and add a file |
-| `19_file_search.py` | Retrieve from an existing vector store |
-| `20_background_response.py` | Start and bounded-poll a long-running response |
-| `21_async_concurrency.py` | Make independent requests concurrently |
-| `22_list_models.py` | Inspect models available to the project |
-| `23_submit_batch.py` | Upload and submit a batch manifest |
-| `24_batch_status.py` | Retrieve batch status and download completed results |
-| `25_fine_tuning_data.py` | Prepare chat fine-tuning JSONL data |
-| `26_create_fine_tuning_job.py` | Start a job from an uploaded training file |
-| `27_image_edit.py` | Edit a supplied image |
-| `28_video_generation.py` | Start, retrieve, and download a video-generation job |
-| `29_realtime.py` | Exchange a text turn over the Realtime API |
-| `30_prompt_eval.py` | Run a small regression test set |
-| `31_prompt_cache.py` | Reuse a stable prompt prefix with prompt caching |
-| `32_error_handling.py` | Handle API errors, retries, and request IDs |
-| `33_remote_mcp.py` | Inspect and explicitly approve a remote MCP tool call |
-| `34_cleanup_resources.py` | Delete or cancel explicitly named remote resources |
+| `12_rag_manual.py` | Manual RAG: embed a corpus, retrieve top-k, generate a grounded answer |
+| `13_moderation.py` | Classify unsafe content |
+| `14_transcription.py` | Transcribe a local audio file |
+| `15_speech.py` | Generate speech to an MP3 file |
+| `16_image_generation.py` | Generate a PNG image |
+| `17_batch_manifest.py` | Build a JSONL manifest for the Batch API |
+| `18_upload_file.py` | Upload a local file for later API use |
+| `19_vector_store.py` | Create a vector store and add a file |
+| `20_file_search.py` | Retrieve from an existing vector store |
+| `21_background_response.py` | Start and bounded-poll a long-running response |
+| `22_async_concurrency.py` | Make independent requests concurrently |
+| `23_list_models.py` | Inspect models available to the project |
+| `24_submit_batch.py` | Upload and submit a batch manifest |
+| `25_batch_status.py` | Retrieve batch status and download completed results |
+| `26_fine_tuning_data.py` | Prepare chat fine-tuning JSONL data |
+| `27_create_fine_tuning_job.py` | Start a job from an uploaded training file |
+| `28_image_edit.py` | Edit a supplied image |
+| `29_video_generation.py` | Start, retrieve, and download a video-generation job |
+| `30_realtime.py` | Exchange a text turn over the Realtime API |
+| `31_prompt_eval.py` | Run a small regression test set |
+| `32_prompt_cache.py` | Reuse a stable prompt prefix with prompt caching |
+| `33_error_handling.py` | Handle API errors, retries, and request IDs |
+| `34_remote_mcp.py` | Inspect and explicitly approve a remote MCP tool call |
+| `35_cleanup_resources.py` | Delete or cancel explicitly named remote resources |
 
 Run `make check-all` for offline formatting, linting, and smoke tests.
 
@@ -63,7 +64,7 @@ fine-tuning, video, and Realtime lessons stay opt-in.
 
 The MCP lesson deliberately has no default third-party server. Supply a remote
 server you have reviewed and trust: `MCP_SERVER_URL=https://... uv run python
-examples/33_remote_mcp.py`. Set `MCP_APPROVE=1` only after reviewing the
+examples/34_remote_mcp.py`. Set `MCP_APPROVE=1` only after reviewing the
 requested tool and arguments. Use `MCP_PROMPT="..."` to request a specific
 read-only action and exercise the approval path.
 
@@ -73,7 +74,7 @@ server. The first command only displays the approval request:
 ```bash
 MCP_SERVER_URL=https://mcp.deepwiki.com/mcp \
 MCP_PROMPT='Use read_wiki_structure for the openai/openai-python repository.' \
-uv run python examples/33_remote_mcp.py
+uv run python examples/34_remote_mcp.py
 ```
 
 After reviewing the requested tool and arguments, add `MCP_APPROVE=1` to send
@@ -87,8 +88,8 @@ provided: `VECTOR_STORE_ID`, `FILE_ID`, `BATCH_ID`, or `FINE_TUNING_JOB_ID`.
 It deletes files/vector stores and cancels active jobs; it never searches for
 or bulk-deletes resources.
 
-`20_background_response.py` waits at most 60 seconds by default; override it
-with `MAX_WAIT_SECONDS`. Re-run `28_video_generation.py` with
+`21_background_response.py` waits at most 60 seconds by default; override it
+with `MAX_WAIT_SECONDS`. Re-run `29_video_generation.py` with
 `VIDEO_ID=<id>` to retrieve a job and download a completed video.
 
 To report today's project token usage, set an admin key plus the project ID,
