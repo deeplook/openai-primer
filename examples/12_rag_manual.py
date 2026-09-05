@@ -11,12 +11,21 @@ bottom for pointers).
 where OpenAI does the chunking, embedding, and retrieval for you.
 """
 
+import math
+
 from _shared import MODEL, client_or_skip
+from openai import OpenAI
 
 
 def cosine_similarity(left: list[float], right: list[float]) -> float:
-    dot = sum(a * b for a, b in zip(left, right, strict=True))
-    return dot / (sum(a * a for a in left) ** 0.5 * sum(b * b for b in right) ** 0.5)
+    dot = 0.0
+    left_norm = 0.0
+    right_norm = 0.0
+    for left_value, right_value in zip(left, right, strict=True):
+        dot += left_value * right_value
+        left_norm += left_value * left_value
+        right_norm += right_value * right_value
+    return dot / (math.sqrt(left_norm) * math.sqrt(right_norm))
 
 
 CORPUS = [
@@ -33,7 +42,9 @@ CORPUS = [
 ]
 
 
-def retrieve(client, query: str, corpus: list[str], top_k: int = 2) -> list[str]:
+def retrieve(
+    client: OpenAI, query: str, corpus: list[str], top_k: int = 2
+) -> list[str]:
     """Embed the query and corpus, then return the top_k closest passages."""
     embedded = client.embeddings.create(model="text-embedding-3-small", input=corpus)
     query_embedding = (

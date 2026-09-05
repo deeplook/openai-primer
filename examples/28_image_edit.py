@@ -20,6 +20,8 @@ def main() -> None:
         result = client.images.edit(
             model="gpt-image-1-mini", image=image, prompt="Add a small red balloon."
         )
+    if not result.data:
+        raise RuntimeError("The image response did not contain image data")
     image_data = result.data[0].b64_json
     if image_data is None:
         raise RuntimeError("The image response did not contain base64 image data")

@@ -1,8 +1,10 @@
 """Use a chosen, trusted remote MCP server and explicitly approve its call."""
 
 import os
+from typing import cast
 
 from _shared import client_or_skip
+from openai.types.responses import ResponseInputItemParam, ToolParam
 
 MCP_MODEL = os.environ.get("OPENAI_MCP_MODEL", "gpt-5.6")
 MCP_PROMPT = os.environ.get(
@@ -26,13 +28,16 @@ def main() -> None:
         print("SKIP: set MCP_SERVER_URL to a remote MCP server you trust")
         return
 
-    tool = {
-        "type": "mcp",
-        "server_label": "trusted_mcp",
-        "server_description": "A remote MCP server explicitly selected by this application.",
-        "server_url": server_url,
-        "require_approval": "always",
-    }
+    tool = cast(
+        ToolParam,
+        {
+            "type": "mcp",
+            "server_label": "trusted_mcp",
+            "server_description": "A remote MCP server explicitly selected by this application.",
+            "server_url": server_url,
+            "require_approval": "always",
+        },
+    )
 
     from openai import APIConnectionError, APIStatusError
 
@@ -64,18 +69,19 @@ def main() -> None:
         print("OK: review the request, then re-run with MCP_APPROVE=1 to approve it")
         return
 
+    approval_responses: list[ResponseInputItemParam] = [
+        {
+            "type": "mcp_approval_response",
+            "approval_request_id": approval.id,
+            "approve": True,
+        }
+        for approval in approvals
+    ]
     response = client.responses.create(
         model=MCP_MODEL,
         tools=[tool],
         previous_response_id=first.id,
-        input=[
-            {
-                "type": "mcp_approval_response",
-                "approval_request_id": approval.id,
-                "approve": True,
-            }
-            for approval in approvals
-        ],
+        input=approval_responses,
     )
     print("OK:", response.output_text)
 

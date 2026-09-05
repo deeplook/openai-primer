@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 EXAMPLE ?= examples/01_first_response.py
 
-.PHONY: help install format lint test run live-core usage clean-remote check-all clean
+.PHONY: help install format lint typecheck test run live-core usage clean-remote check-all clean
 
 LIVE_CORE := examples/01_first_response.py examples/02_chat_completions.py \
 	examples/03_instructions.py examples/04_conversation.py \
@@ -28,6 +28,9 @@ lint: ## Check formatting and linting
 	uv run ruff format --check examples tests tools
 	uv run ruff check examples tests tools
 
+typecheck: ## Run strict mypy checks
+	uv run mypy examples tests
+
 test: ## Run offline smoke tests
 	uv run python -m pytest -v
 
@@ -46,7 +49,7 @@ usage: ## Query this UTC day's token usage (needs OPENAI_ADMIN_KEY and project I
 clean-remote: ## Delete or cancel only explicitly named remote resources
 	uv run python examples/35_cleanup_resources.py
 
-check-all: lint test ## Run all quality checks
+check-all: lint typecheck test ## Run all quality checks
 
 clean: ## Remove caches and generated outputs
 	rm -rf .pytest_cache .ruff_cache out

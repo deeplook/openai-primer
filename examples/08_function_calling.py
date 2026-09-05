@@ -3,8 +3,9 @@
 import json
 
 from _shared import MODEL, client_or_skip
+from openai.types.responses import FunctionToolParam, ResponseInputItemParam
 
-WEATHER_TOOL = {
+WEATHER_TOOL: FunctionToolParam = {
     "type": "function",
     "name": "get_weather",
     "description": "Get the current weather for a city.",
@@ -38,7 +39,7 @@ def main() -> None:
         print("OK: model answered without requesting a tool:", first.output_text)
         return
 
-    outputs = []
+    outputs: list[ResponseInputItemParam] = []
     for call in calls:
         arguments = json.loads(call.arguments)
         result = get_weather(**arguments)

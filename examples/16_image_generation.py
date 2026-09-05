@@ -16,6 +16,8 @@ def main() -> None:
         prompt="A tiny watercolor illustration of a friendly robot reading a book.",
         size="1024x1024",
     )
+    if not result.data:
+        raise RuntimeError("The image response did not contain image data")
     image_data = result.data[0].b64_json
     if image_data is None:
         raise RuntimeError("The image response did not contain base64 image data")

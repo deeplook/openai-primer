@@ -56,7 +56,7 @@ successfully. This keeps the test suite offline and cost-free.
 | `34_remote_mcp.py` | Inspect and explicitly approve a remote MCP tool call |
 | `35_cleanup_resources.py` | Delete or cancel explicitly named remote resources |
 
-Run `make check-all` for offline formatting, linting, and smoke tests.
+Run `make check-all` for offline formatting, linting, strict typing, and smoke tests.
 
 To exercise the low-cost live subset after setting `OPENAI_API_KEY`, run
 `make live-core`. This target uses API credits; the media, file, Batch,
