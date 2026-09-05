@@ -1,5 +1,13 @@
 # OpenAI API Primer
 
+[![CI](https://github.com/deeplook/openai-primer/actions/workflows/check.yml/badge.svg)](https://github.com/deeplook/openai-primer/actions/workflows/check.yml)
+[![PyPI](https://img.shields.io/pypi/v/openai-primer.svg)](https://pypi.org/project/openai-primer/)
+[![Python](https://img.shields.io/pypi/pyversions/openai-primer.svg)](https://pypi.org/project/openai-primer/)
+[![Downloads](https://img.shields.io/pypi/dm/openai-primer.svg)](https://pepy.tech/project/openai-primer)
+[![License](https://img.shields.io/pypi/l/openai-primer.svg)](https://pypi.org/project/openai-primer/)
+[![Docs](https://img.shields.io/badge/docs-deeplook.github.io%2Fopenai--primer-blue)](https://deeplook.github.io/openai-primer)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/deeplook)
+
 Small executable Python lessons for the OpenAI API. New OpenAI applications
 should start with the Responses API; the Chat Completions lesson is included
 because that interface is common among OpenAI-compatible vendors.
