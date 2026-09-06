@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.1.0] - 2026-09-06
 
 ### Changed
 - Prepared the repository for public release with a GitHub-first badge policy

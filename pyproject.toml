@@ -3,6 +3,7 @@ name = "openai-primer"
 version = "0.1.0"
 description = "Small executable lessons for the OpenAI Python API"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = ["openai>=1.0"]
 
