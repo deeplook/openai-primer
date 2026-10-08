@@ -6,8 +6,13 @@ from _shared import client_or_skip
 
 
 def cosine_similarity(left: list[float], right: list[float]) -> float:
-    dot = sum(a * b for a, b in zip(left, right, strict=True))
-    return dot / math.sqrt(sum(a * a for a in left) * sum(b * b for b in right))
+    """Cosine similarity for OpenAI embeddings: just the dot product.
+
+    text-embedding-3-* vectors are L2-normalized to length 1, so both
+    norms in the cosine formula are 1. math.sumprod raises ValueError
+    if the lengths differ.
+    """
+    return math.sumprod(left, right)
 
 
 def main() -> None:

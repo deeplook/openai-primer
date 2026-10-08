@@ -18,14 +18,13 @@ from openai import OpenAI
 
 
 def cosine_similarity(left: list[float], right: list[float]) -> float:
-    dot = 0.0
-    left_norm = 0.0
-    right_norm = 0.0
-    for left_value, right_value in zip(left, right, strict=True):
-        dot += left_value * right_value
-        left_norm += left_value * left_value
-        right_norm += right_value * right_value
-    return dot / (math.sqrt(left_norm) * math.sqrt(right_norm))
+    """Cosine similarity for OpenAI embeddings: just the dot product.
+
+    text-embedding-3-* vectors are L2-normalized to length 1, so both
+    norms in the cosine formula are 1. math.sumprod raises ValueError
+    if the lengths differ.
+    """
+    return math.sumprod(left, right)
 
 
 CORPUS = [
