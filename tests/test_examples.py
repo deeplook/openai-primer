@@ -10,7 +10,7 @@ ROOT = Path(__file__).parent.parent
 
 def test_every_numbered_example_runs_offline() -> None:
     examples = sorted((ROOT / "examples").glob("[0-9][0-9]_*.py"))
-    assert len(examples) == 35
+    assert len(examples) == 38
     environment = os.environ | {"OPENAI_API_KEY": ""}
     for example in examples:
         result = subprocess.run(

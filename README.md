@@ -60,6 +60,15 @@ successfully. This keeps the test suite offline and cost-free.
 | `33_error_handling.py` | Handle API errors, retries, and request IDs |
 | `34_remote_mcp.py` | Inspect and explicitly approve a remote MCP tool call |
 | `35_cleanup_resources.py` | Delete or cancel explicitly named remote resources |
+| `36_decisions_choice.py` | Route text to one of a fixed set of choices |
+| `37_decisions_image.py` | Estimate visible damage probability from an image |
+| `38_decisions_score.py` | Rate issue severity against ordered levels |
+
+The Decisions image lesson uses a bundled photo of a cracked phone screen;
+set `IMAGE_PATH=examples/assets/product_intact.jpg` to compare it with an
+intact phone, or set `IMAGE_PATH` to another local image. The intact-phone
+photo is CC0 1.0; the cracked-phone photo is CC BY-SA 4.0. Attribution and
+license details are in [`examples/assets/README.md`](examples/assets/README.md).
 
 Run `make check-all` for offline formatting, linting, strict typing, and smoke tests.
 
@@ -110,5 +119,6 @@ make usage
 
 - [OpenAI API documentation](https://platform.openai.com/docs)
 - [Responses API](https://platform.openai.com/docs/guides/responses)
+- [Decisions API](https://developers.openai.com/api/docs/guides/decisions)
 - [Text generation](https://platform.openai.com/docs/guides/text)
 - [MCP and Connectors](https://developers.openai.com/api/docs/guides/tools-connectors-mcp)
